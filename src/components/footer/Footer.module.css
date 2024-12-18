@@ -1,0 +1,14 @@
+.footer{
+    display: flex;
+    justify-content: center;
+    background-color: #f3a5f3;
+    align-items: center;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 400px;
+}
+.footer h1{
+    font-size: 16px;
+    color: #fff;
+
+ }
