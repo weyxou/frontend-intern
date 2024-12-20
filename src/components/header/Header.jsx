@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { IoIosSearch } from 'react-icons/io';
-import s from './Header.module.css'
+import s from './Header.module.css';
 
 const Header = () => {
     return (
@@ -13,8 +14,12 @@ const Header = () => {
                 <IoIosSearch color="#f3a5f3" />
             </div>
             <div className={s.btn}>
-                <button className={s.link}>Register</button>
-                <button className={s.link}>Login</button>
+                <Link to="/register">
+                    <button className={s.link}>Register</button>
+                </Link>
+                <Link to="/login">
+                    <button className={s.link}>Login</button>
+                </Link>
             </div>
         </header>
     );

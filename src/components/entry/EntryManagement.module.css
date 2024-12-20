@@ -4,104 +4,111 @@
   margin: auto;
   font-family: Arial, sans-serif;
   border: 1px solid #EE82EE;
+  border-radius: 15px;
+  margin-top: 40px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
   margin-right: 10px;
-  border-radius: 25px;
-  margin-top: 30px;
-  display: flex; /* Включаем флекс-бокс */
-  flex-direction: column; /* Элементы будут идти сверху вниз */
-  align-items: center; /* Центрируем элементы по горизонтали */
 }
 
-  .entry-management h1 {
-    text-align: center;
-    color: #EE82EE;
-    margin-top: 10px;
-  }
+.entry-management h1 {
+  text-align: center;
+  color: #EE82EE;
+  margin-top: 10px;
+  font-size: 30px;
+}
+
+.create-entry {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.create-entry input[type="text"]{
+  padding: 10px;
+  width: 50%;
+  margin-bottom: 10px;
+  border: 1px solid #EE82EE;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.create-entry input[type="file"] {
+  margin-bottom: 10px;
   
-  .create-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .create-entry input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #EE82EE;
-    border-radius: 4px;
-  }
-  .create-entry input::placeholder{
-    color: black;
-  }
-  
-  .create-entry input[type="file"] {
-    flex: 1;
-    margin-right: 10px;
-  }
-  
-  .create-entry button {
-    padding: 8px 15px;
-    background-color: #f3a5f3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .create-entry button:hover {
-    background-color: #EE82EE;
-  }
-  
-  .entries {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .entry {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    width: calc(33.33% - 20px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    background: rgb(255,125,255);
-    background: linear-gradient(90deg, rgba(255,125,255,0.768032212885154) 0%, rgba(243,165,243,0.7624299719887955) 50%, rgba(243,165,243,1) 100%);
-  }
-  
-  .entry .thumbnail {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-  
-  .entry .entry-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .entry .entry-details h3 {
-    margin: 0;
-    font-size: 18px;
-    color: white;
-  }
-  
-  .entry .entry-details button {
-    padding: 5px 15px;
-    background-color: white;
-    color: #EE82EE;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .entry .entry-details button:hover {
-    background-color: #EE82EE;
-  }
-  
+}
+
+.create-entry button {
+  padding: 10px 20px;
+  background-color: #f3a5f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+.create-entry button:hover {
+  background-color: #EE82EE;
+}
+
+.entries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+}
+
+.entry {
+  background: rgb(255, 125, 255);
+  background: linear-gradient(90deg, rgba(255, 125, 255, 0.8) 0%, rgba(243, 165, 243, 0.76) 50%, rgba(243, 165, 243, 1) 100%);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: calc(33.33% - 20px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+
+.entry .thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.entry .entry-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry .entry-details h3 {
+  margin: 0;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
+
+.entry .entry-details button {
+  padding: 5px 15px;
+  background-color: white;
+  color: #EE82EE;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.entry .entry-details button:hover {
+  background-color: #EE82EE;
+  color: white;
+}
