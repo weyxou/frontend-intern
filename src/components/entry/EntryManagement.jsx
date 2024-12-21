@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styles from "./EntryManagement.module.css";
+import { AuthContext } from "../context/AuthContext";
 
 const EntryManagement = () => {
+  const { isAuthenticated } = useContext(AuthContext);
   const [entries, setEntries] = useState([]);
   const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState(""); 
+  const [newDescription, setNewDescription] = useState("");
   const [newImage, setNewImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -18,7 +20,9 @@ const EntryManagement = () => {
 
   const fetchEntries = async () => {
     try {
-      const response = await fetch("https://67659526410f849996558ecf.mockapi.io/users/entries");
+      const response = await fetch(
+        "https://67659526410f849996558ecf.mockapi.io/users/entries"
+      );
       const data = await response.json();
       setEntries(data);
     } catch (error) {
@@ -32,25 +36,37 @@ const EntryManagement = () => {
       return;
     }
 
+    const isDuplicate = entries.some(
+      (entry) => entry.title.toLowerCase() === newTitle.toLowerCase()
+    );
+  
+    if (isDuplicate) {
+      alert("Choose another title");
+      return;
+    }
+
     const newEntry = {
       title: newTitle,
-      description: newDescription,  
+      description: newDescription,
       image: URL.createObjectURL(newImage),
     };
 
     try {
-      const response = await fetch("https://67659526410f849996558ecf.mockapi.io/users/entries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newEntry),
-      });
+      const response = await fetch(
+        "https://67659526410f849996558ecf.mockapi.io/users/entries",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newEntry),
+        }
+      );
 
       if (response.ok) {
-        fetchEntries(); 
+        fetchEntries();
         setNewTitle("");
-        setNewDescription(""); 
+        setNewDescription("");
         setNewImage(null);
       } else {
         alert("Failed to add.");
@@ -61,7 +77,9 @@ const EntryManagement = () => {
   };
 
   const handleDeleteEntry = async (id) => {
-    const isConfirmed = window.confirm("Are you sure you want to delete this entry?");
+    const isConfirmed = window.confirm(
+      "Are you sure you want to delete this entry?"
+    );
     if (isConfirmed) {
       try {
         const response = await fetch(
@@ -72,7 +90,7 @@ const EntryManagement = () => {
         );
 
         if (response.ok) {
-          fetchEntries(); 
+          fetchEntries();
         } else {
           alert("Failed to delete.");
         }
@@ -85,19 +103,19 @@ const EntryManagement = () => {
   const handleEditEntry = (id) => {
     const entryToEdit = entries.find((entry) => entry.id === id);
     setNewTitle(entryToEdit.title);
-    setNewDescription(entryToEdit.description);  
-    setNewImage(null); 
+    setNewDescription(entryToEdit.description);
+    setNewImage(null);
     setIsEditing(true);
     setEditingId(id);
     setEditTitle(false);
     setEditImage(false);
-    setEditDescription(false);  
+    setEditDescription(false);
   };
 
   const handleSaveEdit = async () => {
     const updatedEntry = {
       title: editTitle ? newTitle : undefined,
-      description: editDescription ? newDescription : undefined,  
+      description: editDescription ? newDescription : undefined,
       image: editImage ? URL.createObjectURL(newImage) : undefined,
     };
 
@@ -114,15 +132,15 @@ const EntryManagement = () => {
       );
 
       if (response.ok) {
-        fetchEntries(); 
+        fetchEntries();
         setNewTitle("");
-        setNewDescription("");  
+        setNewDescription("");
         setNewImage(null);
         setIsEditing(false);
         setEditingId(null);
         setEditTitle(false);
         setEditImage(false);
-        setEditDescription(false);  
+        setEditDescription(false);
       } else {
         alert("Failed to save changes.");
       }
@@ -130,6 +148,10 @@ const EntryManagement = () => {
       console.error("Error", error);
     }
   };
+
+  if (!isAuthenticated) {
+    return <p>You must be logged in to view this page.</p>;
+  }
 
   return (
     <div className={styles["entry-management"]}>
@@ -144,7 +166,7 @@ const EntryManagement = () => {
         />
         <input
           type="text"
-          placeholder="description"  
+          placeholder="description"
           value={newDescription}
           onChange={(e) => setNewDescription(e.target.value)}
         />
@@ -196,12 +218,18 @@ const EntryManagement = () => {
       <div className={styles.entries}>
         {entries.map((entry) => (
           <div key={entry.id} className={styles.entry}>
-            <img src={entry.image} alt={entry.title} className={styles.thumbnail} />
+            <img
+              src={entry.image}
+              alt={entry.title}
+              className={styles.thumbnail}
+            />
             <div className={styles["entry-details"]}>
               <h3>{entry.title}</h3>
               <p>{entry.description}</p>
               <button onClick={() => handleEditEntry(entry.id)}>Edit</button>
-              <button onClick={() => handleDeleteEntry(entry.id)}>Delete</button>
+              <button onClick={() => handleDeleteEntry(entry.id)}>
+                Delete
+              </button>
             </div>
           </div>
         ))}

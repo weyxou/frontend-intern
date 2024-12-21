@@ -5,15 +5,19 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Register from './components/register/Register';
 import Login from './components/login/Login';
+import PrivateRoute from './components/routes/PrivateRoute'; 
 
 function App() {
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<EntryManagement />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={<PrivateRoute element={EntryManagement} />}
+        />
       </Routes>
       <Footer />
     </Router>
