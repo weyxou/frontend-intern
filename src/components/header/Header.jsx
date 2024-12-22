@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IoIosSearch } from 'react-icons/io';
 import s from './Header.module.css';
 
 const Header = () => {
